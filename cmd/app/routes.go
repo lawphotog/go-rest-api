@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func getRoutes() *gin.Engine {
+func registerRoutes() *gin.Engine {
 	r := gin.Default()
 
 	r.GET("/", func(c *gin.Context) {

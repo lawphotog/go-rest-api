@@ -1,6 +1,43 @@
 package main
 
+import (
+	"context"
+	"fmt"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
+)
+
 func main() {
-	r := getRoutes()
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	r := registerRoutes()
+	srv := &http.Server{
+		Addr:    ":8080",
+		Handler: r,
+	}
+
+	go func() {
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			fmt.Printf("listen: %s\n", err)
+		}
+	}()
+
+	handleShutdown(srv)
+}
+
+func handleShutdown(srv *http.Server) {
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+
+	fmt.Println("Shutting down server...")
+
+	ctx, cancel := context.WithTimeout(context.TODO(), 60 * time.Second)
+	defer cancel()
+	if err := srv.Shutdown(ctx); err != nil {
+		fmt.Printf("Server forced to shutdown: %s\n", err)
+	}
+
+	fmt.Println("Server exiting")
 }
