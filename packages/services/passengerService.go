@@ -1,6 +1,8 @@
 package services
 
 import (
+	"log"
+
 	"github.com/lawphotog/go-rest-api/packages/domains"
 	"github.com/lawphotog/go-rest-api/packages/repositories"
 )
@@ -15,9 +17,13 @@ func NewPassengerService(passengerRepository Repository) *PassengerService {
 	}
 }
 
-func (p *PassengerService) GetPassengers() []domains.Passenger {
-	passengers := p.passengerRepository.GetPassengers()
-	return mapPassengers(passengers)
+func (p *PassengerService) GetPassengers() ([]domains.Passenger, error) {
+	passengers, err := p.passengerRepository.GetPassengers()
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+	return mapPassengers(passengers), nil
 }
 
 func mapPassengers(passengers []repositories.Passenger) []domains.Passenger {
@@ -36,5 +42,5 @@ func mapPassenger(p repositories.Passenger) domains.Passenger {
 }
 
 type Repository interface {
-	GetPassengers() []repositories.Passenger
+	GetPassengers() ([]repositories.Passenger, error)
 }

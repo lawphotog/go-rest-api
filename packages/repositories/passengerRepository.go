@@ -19,6 +19,6 @@ func NewPassengerRepository() *PassengerRepository {
 	return &PassengerRepository{}
 }
 
-func (p *PassengerRepository) GetPassengers() []Passenger {
-	return passengers
+func (p *PassengerRepository) GetPassengers() ([]Passenger, error) {
+	return passengers, nil
 }

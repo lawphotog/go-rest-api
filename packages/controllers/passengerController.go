@@ -17,12 +17,17 @@ func NewPassengerController(passengerService Service) *PassengerController {
 }
 
 func (p *PassengerController) GetPassengers(c *gin.Context) {
-	passengers := p.passengerService.GetPassengers()
+	passengers, err := p.passengerService.GetPassengers()
+	if err != nil {
+		c.JSON(200, gin.H{
+			"error": "An error has occurred",
+		})
+	}
 	c.JSON(200, gin.H{
 		"passengers": passengers,
 	})
 }
 
 type Service interface {
-	GetPassengers() []domains.Passenger
+	GetPassengers() ([]domains.Passenger, error)
 }
