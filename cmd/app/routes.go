@@ -15,6 +15,7 @@ func registerRoutes() *gin.Engine {
 
 	passengerController := getPassengerController()
 	r.GET("/passenger", passengerController.GetPassengers)
+	r.POST("/passenger/add", passengerController.AddPassenger)
 
 	return r
 }

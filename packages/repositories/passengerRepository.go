@@ -22,3 +22,8 @@ func NewPassengerRepository() *PassengerRepository {
 func (p *PassengerRepository) GetPassengers() ([]Passenger, error) {
 	return passengers, nil
 }
+
+func (p *PassengerRepository) AddPassenger(passenger Passenger) error {
+	passengers = append(passengers, passenger)
+	return nil
+}

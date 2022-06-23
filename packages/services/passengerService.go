@@ -26,6 +26,15 @@ func (p *PassengerService) GetPassengers() ([]domains.Passenger, error) {
 	return mapPassengers(passengers), nil
 }
 
+func (p *PassengerService) AddPassenger(passenger domains.Passenger) error {
+	err := p.passengerRepository.AddPassenger(repositories.Passenger(passenger))
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	return nil
+}
+
 func mapPassengers(passengers []repositories.Passenger) []domains.Passenger {
 	domainPassengers := []domains.Passenger{}
 	for _, v := range passengers {
@@ -43,4 +52,5 @@ func mapPassenger(p repositories.Passenger) domains.Passenger {
 
 type Repository interface {
 	GetPassengers() ([]repositories.Passenger, error)
+	AddPassenger(passenger repositories.Passenger) error
 }

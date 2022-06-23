@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"log"
+
 	"github.com/lawphotog/go-rest-api/packages/domains"
 
 	"github.com/gin-gonic/gin"
@@ -22,12 +24,37 @@ func (p *PassengerController) GetPassengers(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"error": "An error has occurred",
 		})
+		return
 	}
 	c.JSON(200, gin.H{
 		"passengers": passengers,
 	})
 }
 
+func (p *PassengerController) AddPassenger(c *gin.Context) {
+	var passenger domains.Passenger
+	if err := c.BindJSON(&passenger); err != nil {
+		log.Println(err)
+		c.JSON(200, gin.H{
+			"error": "An error has occurred",
+		})
+		return
+	}
+	err := p.passengerService.AddPassenger(passenger)
+	if err != nil {
+		log.Println(err)
+		c.JSON(200, gin.H{
+			"error": "An error has occurred",
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{
+		"message": "a new passenger is added successfully",
+	})
+}
+
 type Service interface {
 	GetPassengers() ([]domains.Passenger, error)
+	AddPassenger(passenger domains.Passenger) error
 }
