@@ -38,16 +38,9 @@ func (p *PassengerService) AddPassenger(passenger domains.Passenger) error {
 func mapPassengers(passengers []repositories.Passenger) []domains.Passenger {
 	domainPassengers := []domains.Passenger{}
 	for _, v := range passengers {
-		domainPassengers = append(domainPassengers, mapPassenger(v))
+		domainPassengers = append(domainPassengers, domains.Passenger(v))
 	}
 	return domainPassengers
-}
-
-func mapPassenger(p repositories.Passenger) domains.Passenger {
-	return domains.Passenger{
-		Id: p.Id,
-		Name: p.Name,
-	}
 }
 
 type Repository interface {
