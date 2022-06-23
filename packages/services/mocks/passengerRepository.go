@@ -16,6 +16,6 @@ func (p *PassengerRepository) GetPassengers() ([]repositories.Passenger, error) 
 }
 
 func (p *PassengerRepository) AddPassenger(passenger repositories.Passenger) error {
-	args := p.Called()
-	return args.Error(1)
+	args := p.Called(passenger)
+	return args.Error(0)
 }
