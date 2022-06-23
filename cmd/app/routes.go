@@ -4,9 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func registerRoutes() *gin.Engine {
-	r := gin.Default()
-
+func registerRoutes(r *gin.Engine) *gin.Engine {
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "service is up",

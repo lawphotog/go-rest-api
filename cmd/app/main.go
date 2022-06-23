@@ -8,10 +8,16 @@ import (
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/lawphotog/go-rest-api/packages/middleware"
 )
 
 func main() {
-	r := registerRoutes()
+	r := gin.Default()
+	r.Use(middleware.LoggingMiddleware)
+	r = registerRoutes(r)
+
 	srv := &http.Server{
 		Addr:    ":8080",
 		Handler: r,
