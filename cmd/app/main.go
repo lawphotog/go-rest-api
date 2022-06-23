@@ -10,12 +10,16 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/cors"
 	"github.com/lawphotog/go-rest-api/packages/middleware"
 )
 
 func main() {
 	r := gin.Default()
+
 	r.Use(middleware.LoggingMiddleware)
+	r.Use(cors.Default()) // AllowAllOrigins = true
+
 	r = registerRoutes(r)
 
 	srv := &http.Server{
