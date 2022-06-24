@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/lawphotog/go-rest-api/packages/controllers"
-	"github.com/lawphotog/go-rest-api/packages/repositories"
-	"github.com/lawphotog/go-rest-api/packages/services"
+	"github.com/lawphotog/go-rest-api/internal/controllers"
+	"github.com/lawphotog/go-rest-api/internal/repositories"
+	"github.com/lawphotog/go-rest-api/internal/services"
 )
 
 func getPassengerController() *controllers.PassengerController {

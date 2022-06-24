@@ -1,7 +1,7 @@
 package mocks
 
 import (
-	"github.com/lawphotog/go-rest-api/packages/repositories"
+	"github.com/lawphotog/go-rest-api/internal/repositories"
 	"github.com/stretchr/testify/mock"
 )
 

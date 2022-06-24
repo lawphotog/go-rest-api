@@ -3,7 +3,7 @@ package controllers
 import (
 	"log"
 
-	"github.com/lawphotog/go-rest-api/packages/domains"
+	"github.com/lawphotog/go-rest-api/internal/domains"
 
 	"github.com/gin-gonic/gin"
 )

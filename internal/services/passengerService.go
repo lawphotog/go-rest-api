@@ -3,8 +3,8 @@ package services
 import (
 	"log"
 
-	"github.com/lawphotog/go-rest-api/packages/domains"
-	"github.com/lawphotog/go-rest-api/packages/repositories"
+	"github.com/lawphotog/go-rest-api/internal/domains"
+	"github.com/lawphotog/go-rest-api/internal/repositories"
 )
 
 type PassengerService struct {
