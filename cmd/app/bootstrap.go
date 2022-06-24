@@ -7,7 +7,7 @@ import (
 )
 
 func getPassengerController() *controllers.PassengerController {
-	
+
 	passengerRepository := repositories.NewPassengerRepository()
 	passengerService := services.NewPassengerService(passengerRepository)
 	return controllers.NewPassengerController(passengerService)

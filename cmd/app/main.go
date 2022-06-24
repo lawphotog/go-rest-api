@@ -9,8 +9,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 	"github.com/lawphotog/go-rest-api/internal/middleware"
 )
 
@@ -43,7 +43,7 @@ func handleShutdown(srv *http.Server) {
 
 	fmt.Println("Shutting down server...")
 
-	ctx, cancel := context.WithTimeout(context.TODO(), 60 * time.Second)
+	ctx, cancel := context.WithTimeout(context.TODO(), 60*time.Second)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
 		fmt.Printf("Server forced to shutdown: %s\n", err)

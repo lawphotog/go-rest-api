@@ -6,11 +6,11 @@ type PassengerRepository struct {
 //mock data
 var passengers []Passenger = []Passenger{
 	{
-		Id: "1",
+		Id:   "1",
 		Name: "John",
 	},
 	{
-		Id: "2",
+		Id:   "2",
 		Name: "Joe",
 	},
 }
